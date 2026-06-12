@@ -1,0 +1,6 @@
+.npmrc
+AGENTS.md
+design-qa.md
+package.json
+vite.config.mjs
+src/
