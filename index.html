@@ -1,0 +1,2181 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>证券投资知识体系</title>
+    <style>
+      :root {
+        --paper: #f7f2ea;
+        --ink: #2f3432;
+        --muted: #6f736e;
+        --line: #d7cec0;
+        --sage: #7e8e70;
+        --sage-soft: #edf0e8;
+        --blue: #6f91a6;
+        --blue-soft: #eef4f5;
+        --clay: #b9785e;
+        --clay-soft: #f6ece4;
+        --lavender: #85789e;
+        --lavender-soft: #f0edf4;
+        --taupe: #b39f84;
+        --white: rgba(255, 253, 248, 0.88);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+          Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: 28px;
+        background:
+          linear-gradient(90deg, rgba(126, 142, 112, 0.08), transparent 22%, transparent 78%, rgba(111, 145, 166, 0.07)),
+          var(--paper);
+      }
+
+      .canvas {
+        width: min(1384px, 100%);
+        margin: 0 auto;
+        padding: 30px 34px 24px;
+      }
+
+      .title-wrap {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 28px;
+        margin-bottom: 24px;
+      }
+
+      .title-rule {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--taupe));
+        position: relative;
+      }
+
+      .title-rule:last-child {
+        background: linear-gradient(90deg, var(--taupe), transparent);
+      }
+
+      .title-rule::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: -4px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--taupe);
+      }
+
+      .title-rule:last-child::after {
+        left: 0;
+        right: auto;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 42px;
+        line-height: 1.1;
+        letter-spacing: 0;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .subtitle {
+        margin: -8px 0 20px;
+        color: #575b56;
+        font-size: 16px;
+        letter-spacing: 0;
+        text-align: center;
+      }
+
+      .map {
+        display: grid;
+        gap: 16px;
+      }
+
+      .layer {
+        display: grid;
+        grid-template-columns: 164px 1fr;
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .stage {
+        min-height: 138px;
+        border: 1px solid color-mix(in srgb, var(--tone) 62%, white);
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--tone-soft) 78%, white);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 18px 14px;
+      }
+
+      .stage-number {
+        display: inline-grid;
+        place-items: center;
+        width: 56px;
+        height: 42px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        color: #fff;
+        background: var(--tone);
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .stage-title {
+        margin: 0 0 8px;
+        color: var(--tone-dark);
+        font-size: 24px;
+        line-height: 1.18;
+        font-weight: 800;
+      }
+
+      .stage-copy {
+        margin: 0;
+        color: #5e635d;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .modules {
+        position: relative;
+        display: grid;
+        grid-template-columns: var(--columns);
+        gap: 16px;
+        align-items: stretch;
+        padding: 10px 0;
+        border-top: 1px solid color-mix(in srgb, var(--tone) 22%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--tone) 22%, transparent);
+      }
+
+      .module {
+        min-height: 118px;
+        border: 1px solid color-mix(in srgb, var(--tone) 34%, #ebe2d5);
+        border-radius: 8px;
+        background: var(--white);
+        padding: 15px 18px 14px;
+      }
+
+      .module-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid color-mix(in srgb, var(--tone) 28%, transparent);
+      }
+
+      .module-index {
+        display: inline-grid;
+        place-items: center;
+        min-width: 42px;
+        height: 28px;
+        border-radius: 8px;
+        color: #fff;
+        background: var(--tone);
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .module-title {
+        color: var(--tone-dark);
+        font-size: 21px;
+        line-height: 1.1;
+        font-weight: 800;
+      }
+
+      .module ul {
+        margin: 10px 0 0;
+        padding-left: 18px;
+        color: #404641;
+        font-size: 14px;
+        line-height: 1.62;
+      }
+
+      .module li::marker {
+        color: var(--tone);
+      }
+
+      .flow-arrow {
+        display: grid;
+        place-items: center;
+        color: var(--tone);
+        font-size: 28px;
+        line-height: 1;
+        font-weight: 700;
+      }
+
+      .foundation {
+        --tone: var(--sage);
+        --tone-soft: var(--sage-soft);
+        --tone-dark: #627254;
+      }
+
+      .research {
+        --tone: var(--blue);
+        --tone-soft: var(--blue-soft);
+        --tone-dark: #537b94;
+      }
+
+      .execution {
+        --tone: var(--clay);
+        --tone-soft: var(--clay-soft);
+        --tone-dark: #a56248;
+      }
+
+      .advance {
+        --tone: var(--lavender);
+        --tone-soft: var(--lavender-soft);
+        --tone-dark: #74658f;
+      }
+
+      .connector-row {
+        display: grid;
+        grid-template-columns: 164px 1fr;
+        gap: 22px;
+        height: 16px;
+        margin-top: -6px;
+        margin-bottom: -6px;
+      }
+
+      .connector {
+        grid-column: 2;
+        display: grid;
+        place-items: center;
+        color: var(--taupe);
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .axis {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin: 22px 18px 0 204px;
+        color: #5a5d58;
+      }
+
+      .axis-step {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        border: 1px solid #d9cdbc;
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.62);
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .axis-step + .axis-step {
+        position: relative;
+      }
+
+      .axis-step + .axis-step::before {
+        content: "→";
+        position: absolute;
+        left: -20px;
+        color: var(--taupe);
+        font-size: 22px;
+      }
+
+      .notes {
+        width: min(1384px, 100%);
+        margin: 34px auto 0;
+        padding: 30px 34px 42px;
+        border-top: 1px solid rgba(179, 159, 132, 0.42);
+      }
+
+      .notes-head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: end;
+        margin-bottom: 22px;
+      }
+
+      .eyebrow {
+        margin: 0 0 7px;
+        color: var(--taupe);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .notes h2 {
+        margin: 0;
+        font-size: 30px;
+        line-height: 1.16;
+        letter-spacing: 0;
+      }
+
+      .notes-intro {
+        max-width: 620px;
+        margin: 8px 0 0;
+        color: #62665f;
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        padding: 0 11px;
+        border: 1px solid #d8cebf;
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.66);
+        color: #5f625d;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .note-stage {
+        margin-top: 24px;
+      }
+
+      .note-stage-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 14px;
+        color: var(--tone-dark);
+        font-size: 22px;
+        line-height: 1.2;
+      }
+
+      .note-stage-title::before {
+        content: "";
+        width: 11px;
+        height: 28px;
+        border-radius: 6px;
+        background: var(--tone);
+      }
+
+      .note-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .note-card {
+        border: 1px solid color-mix(in srgb, var(--tone) 25%, #e3dacd);
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.72);
+        padding: 18px;
+      }
+
+      .note-card h4 {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin: 0 0 12px;
+        color: var(--tone-dark);
+        font-size: 20px;
+        line-height: 1.22;
+      }
+
+      .note-card h4 span {
+        color: var(--tone);
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .note-columns {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .note-block {
+        min-width: 0;
+      }
+
+      .note-block strong {
+        display: block;
+        margin-bottom: 6px;
+        color: #555b55;
+        font-size: 13px;
+      }
+
+      .note-block ul {
+        margin: 0;
+        padding-left: 18px;
+        color: #414742;
+        font-size: 13px;
+        line-height: 1.62;
+      }
+
+      .note-block li::marker {
+        color: var(--tone);
+      }
+
+      .framework {
+        margin-top: 28px;
+        padding: 22px;
+        border: 1px solid #d7cbb9;
+        border-radius: 8px;
+        background: rgba(239, 235, 226, 0.58);
+      }
+
+      .framework h3 {
+        margin: 0 0 14px;
+        font-size: 23px;
+      }
+
+      .framework-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .framework-item {
+        padding: 14px 12px;
+        border: 1px solid #d9cebf;
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.66);
+      }
+
+      .framework-item b {
+        display: block;
+        margin-bottom: 7px;
+        color: #665e52;
+        font-size: 15px;
+      }
+
+      .framework-item p {
+        margin: 0;
+        color: #5c615b;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .rulebook {
+        margin-top: 18px;
+        padding: 22px;
+        border: 1px solid color-mix(in srgb, var(--manual-tone, #b9785e) 34%, #e3dacd);
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--manual-soft, #f6ece4) 64%, transparent);
+      }
+
+      .rulebook h3 {
+        margin: 0 0 6px;
+        font-size: 23px;
+        color: color-mix(in srgb, var(--manual-tone, #b9785e) 72%, #2f3432);
+      }
+
+      .rulebook-intro {
+        margin: 0 0 16px;
+        max-width: 840px;
+        color: #62665f;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .rule-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .rule-card {
+        border: 1px solid color-mix(in srgb, var(--manual-tone, #b9785e) 28%, #e3dacd);
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.74);
+        padding: 17px 18px;
+      }
+
+      .rule-card h4 {
+        margin: 0 0 10px;
+        color: color-mix(in srgb, var(--manual-tone, #b9785e) 82%, #2f3432);
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
+      .rule-card h5 {
+        margin: 12px 0 6px;
+        color: #555b55;
+        font-size: 13px;
+      }
+
+      .rule-card ul,
+      .rule-card ol {
+        margin: 0;
+        padding-left: 19px;
+        color: #414742;
+        font-size: 13px;
+        line-height: 1.68;
+      }
+
+      .rule-card li::marker {
+        color: var(--manual-tone, #b9785e);
+        font-weight: 700;
+      }
+
+      .rule-formula {
+        margin-top: 13px;
+        padding: 11px 12px;
+        border-left: 4px solid var(--manual-tone, #b9785e);
+        border-radius: 6px;
+        background: rgba(247, 242, 234, 0.78);
+        color: #5b4f47;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .company-manual {
+        --manual-tone: var(--blue);
+        --manual-soft: var(--blue-soft);
+      }
+
+      .trade-manual {
+        --manual-tone: var(--clay);
+        --manual-soft: var(--clay-soft);
+      }
+
+      .industry-manual {
+        --manual-tone: var(--sage);
+        --manual-soft: var(--sage-soft);
+      }
+
+      .valuation-manual {
+        --manual-tone: var(--taupe);
+        --manual-soft: #f0ebe2;
+      }
+
+      .portfolio-manual {
+        --manual-tone: var(--lavender);
+        --manual-soft: var(--lavender-soft);
+      }
+
+      .risk-manual {
+        --manual-tone: #8b7968;
+        --manual-soft: #ede7dd;
+      }
+
+      .review-manual {
+        --manual-tone: #739395;
+        --manual-soft: #edf3f2;
+      }
+
+      .final-checklist {
+        margin-top: 18px;
+        padding: 22px;
+        border: 1px solid #d7cbb9;
+        border-radius: 8px;
+        background: rgba(255, 253, 248, 0.72);
+      }
+
+      .final-checklist h3 {
+        margin: 0 0 14px;
+        font-size: 23px;
+      }
+
+      .checklist-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .checklist-card {
+        padding: 15px;
+        border: 1px solid #ded4c5;
+        border-radius: 8px;
+        background: rgba(247, 242, 234, 0.62);
+      }
+
+      .checklist-card b {
+        display: block;
+        margin-bottom: 8px;
+        color: #59574f;
+        font-size: 15px;
+      }
+
+      .checklist-card ul {
+        margin: 0;
+        padding-left: 18px;
+        color: #414742;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .disclaimer {
+        margin-top: 18px;
+        padding: 20px 22px;
+        border: 1px solid #d8cebf;
+        border-radius: 8px;
+        background: rgba(239, 235, 226, 0.58);
+      }
+
+      .disclaimer h3 {
+        margin: 0 0 10px;
+        color: #5e5b52;
+        font-size: 21px;
+      }
+
+      .disclaimer p {
+        margin: 0 0 10px;
+        color: #555b55;
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .disclaimer p:last-child {
+        margin-bottom: 0;
+      }
+
+      .disclaimer strong {
+        color: #4c514c;
+      }
+
+      @media (max-width: 980px) {
+        .page {
+          padding: 16px;
+        }
+
+        .canvas {
+          padding: 20px 10px;
+        }
+
+        h1 {
+          font-size: 32px;
+        }
+
+        .title-wrap {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .title-rule {
+          display: none;
+        }
+
+        .layer {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .modules {
+          grid-template-columns: 1fr;
+        }
+
+        .flow-arrow,
+        .connector-row {
+          display: none;
+        }
+
+        .axis {
+          margin: 18px 0 0;
+          grid-template-columns: 1fr;
+        }
+
+        .axis-step + .axis-step::before {
+          display: none;
+        }
+
+        .notes {
+          padding: 24px 10px 34px;
+        }
+
+        .notes-head,
+        .note-grid,
+        .note-columns,
+        .framework-grid,
+        .rule-grid,
+        .checklist-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .legend {
+          justify-content: flex-start;
+        }
+      }
+
+      @media print {
+        @page {
+          size: A4 landscape;
+          margin: 8mm;
+        }
+
+        body,
+        .page {
+          background: var(--paper);
+        }
+
+        .page {
+          padding: 0;
+        }
+
+        .canvas {
+          width: 100%;
+          padding: 8px;
+        }
+
+        h1 {
+          font-size: 34px;
+        }
+
+        .subtitle {
+          font-size: 13px;
+          margin-bottom: 12px;
+        }
+
+        .layer {
+          gap: 14px;
+          grid-template-columns: 136px 1fr;
+        }
+
+        .stage {
+          min-height: 112px;
+          padding: 12px 8px;
+        }
+
+        .stage-number {
+          width: 46px;
+          height: 32px;
+          font-size: 20px;
+        }
+
+        .stage-title {
+          font-size: 20px;
+        }
+
+        .stage-copy,
+        .module ul {
+          font-size: 11px;
+        }
+
+        .module {
+          min-height: 96px;
+          padding: 10px 12px;
+        }
+
+        .module-title {
+          font-size: 17px;
+        }
+
+        .axis {
+          margin-left: 154px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="canvas" aria-label="证券投资知识体系学习路径图">
+        <div class="title-wrap">
+          <div class="title-rule"></div>
+          <h1>证券投资知识体系</h1>
+          <div class="title-rule"></div>
+        </div>
+        <p class="subtitle">从认知到实战，构建系统化投资能力</p>
+
+        <div class="map">
+          <section class="layer foundation">
+            <aside class="stage">
+              <div>
+                <div class="stage-number">01</div>
+                <h2 class="stage-title">认知与市场</h2>
+                <p class="stage-copy">理解市场本质<br />把握宏观脉络</p>
+              </div>
+            </aside>
+            <div class="modules" style="--columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr)">
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">01</span>
+                  <span class="module-title">投资认知</span>
+                </div>
+                <ul>
+                  <li>投资目标与收益来源</li>
+                  <li>长期思维与复利效应</li>
+                  <li>能力圈与边界意识</li>
+                  <li>价值投资理念</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">02</span>
+                  <span class="module-title">市场基础</span>
+                </div>
+                <ul>
+                  <li>证券市场结构与功能</li>
+                  <li>交易机制与规则</li>
+                  <li>主要市场与指数</li>
+                  <li>金融产品与工具</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">03</span>
+                  <span class="module-title">宏观分析</span>
+                </div>
+                <ul>
+                  <li>宏观经济指标</li>
+                  <li>经济周期与货币政策</li>
+                  <li>财政政策与产业政策</li>
+                  <li>国际形势与地缘政治</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">04</span>
+                  <span class="module-title">行业分析</span>
+                </div>
+                <ul>
+                  <li>行业分类与生命周期</li>
+                  <li>行业格局与竞争结构</li>
+                  <li>产业链与价值链分析</li>
+                  <li>行业景气度与驱动因素</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <div class="connector-row"><div class="connector">↓</div></div>
+
+          <section class="layer research">
+            <aside class="stage">
+              <div>
+                <div class="stage-number">02</div>
+                <h2 class="stage-title">分析与估值</h2>
+                <p class="stage-copy">研究企业价值<br />评估合理价格</p>
+              </div>
+            </aside>
+            <div class="modules" style="--columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr)">
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">05</span>
+                  <span class="module-title">公司分析</span>
+                </div>
+                <ul>
+                  <li>财务报表与质量分析</li>
+                  <li>商业模式与竞争优势</li>
+                  <li>治理结构与管理层</li>
+                  <li>成长性与核心能力</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">06</span>
+                  <span class="module-title">估值体系</span>
+                </div>
+                <ul>
+                  <li>估值原理与方法</li>
+                  <li>相对估值法</li>
+                  <li>绝对估值法</li>
+                  <li>估值应用与安全边际</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">07</span>
+                  <span class="module-title">技术分析</span>
+                </div>
+                <ul>
+                  <li>价格与成交量分析</li>
+                  <li>趋势分析与形态识别</li>
+                  <li>技术指标与工具</li>
+                  <li>量价关系与市场情绪</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <div class="connector-row"><div class="connector">↓</div></div>
+
+          <section class="layer execution">
+            <aside class="stage">
+              <div>
+                <div class="stage-number">03</div>
+                <h2 class="stage-title">交易与组合</h2>
+                <p class="stage-copy">制定交易策略<br />管理投资组合</p>
+              </div>
+            </aside>
+            <div class="modules" style="--columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr)">
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">08</span>
+                  <span class="module-title">交易体系</span>
+                </div>
+                <ul>
+                  <li>交易原则与纪律</li>
+                  <li>入场策略与信号</li>
+                  <li>止损止盈与仓位管理</li>
+                  <li>订单执行与成本控制</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">09</span>
+                  <span class="module-title">组合管理</span>
+                </div>
+                <ul>
+                  <li>资产配置与大类资产</li>
+                  <li>组合构建与优化</li>
+                  <li>分散化与相关性管理</li>
+                  <li>再平衡与绩效评估</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">10</span>
+                  <span class="module-title">投资心理</span>
+                </div>
+                <ul>
+                  <li>心理偏差与行为金融</li>
+                  <li>情绪管理与自我认知</li>
+                  <li>耐心与纪律</li>
+                  <li>投资心态与修炼</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <div class="connector-row"><div class="connector">↓</div></div>
+
+          <section class="layer advance">
+            <aside class="stage">
+              <div>
+                <div class="stage-number">04</div>
+                <h2 class="stage-title">风控与进阶</h2>
+                <p class="stage-copy">控制风险回撤<br />持续提升能力</p>
+              </div>
+            </aside>
+            <div class="modules" style="--columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr)">
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">11</span>
+                  <span class="module-title">风险控制</span>
+                </div>
+                <ul>
+                  <li>风险识别与度量</li>
+                  <li>风险敞口与仓位管理</li>
+                  <li>风险分散与对冲策略</li>
+                  <li>压力测试与情景分析</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">12</span>
+                  <span class="module-title">信息研究</span>
+                </div>
+                <ul>
+                  <li>信息来源与筛选</li>
+                  <li>研究方法与框架</li>
+                  <li>数据分析与验证</li>
+                  <li>研究报告与决策应用</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">13</span>
+                  <span class="module-title">投资流派</span>
+                </div>
+                <ul>
+                  <li>价值投资流派</li>
+                  <li>成长投资流派</li>
+                  <li>趋势投资流派</li>
+                  <li>多元策略与融合</li>
+                </ul>
+              </article>
+              <div class="flow-arrow">→</div>
+              <article class="module">
+                <div class="module-head">
+                  <span class="module-index">14</span>
+                  <span class="module-title">实战进阶</span>
+                </div>
+                <ul>
+                  <li>投资系统与框架搭建</li>
+                  <li>实战复盘与总结</li>
+                  <li>持续学习与迭代</li>
+                  <li>认知升级与长期主义</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <nav class="axis" aria-label="学习主线">
+          <div class="axis-step">理解市场</div>
+          <div class="axis-step">评估价值</div>
+          <div class="axis-step">制定策略</div>
+          <div class="axis-step">管理风险</div>
+          <div class="axis-step">持续进化</div>
+        </nav>
+      </section>
+
+      <section class="notes" aria-label="证券投资学习笔记">
+        <div class="notes-head">
+          <div>
+            <p class="eyebrow">LEARNING NOTES</p>
+            <h2>完整学习笔记版</h2>
+            <p class="notes-intro">
+              这部分把上面的知识地图展开成可学习、可复盘、可执行的笔记。每个模块都对应三个问题：
+              要学什么、如何判断、下一步怎么练。
+            </p>
+          </div>
+          <div class="legend" aria-label="笔记阅读提示">
+            <span>学什么</span>
+            <span>怎么判断</span>
+            <span>实战动作</span>
+          </div>
+        </div>
+
+        <section class="note-stage foundation">
+          <h3 class="note-stage-title">01 认知与市场：先建立正确坐标系</h3>
+          <div class="note-grid">
+            <article class="note-card">
+              <h4><span>01</span>投资认知</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>收益来自盈利增长、估值变化、分红和交易价差。</li>
+                    <li>风险不是波动本身，而是本金永久损失和认知失真。</li>
+                    <li>明确自己是长期配置、波段交易，还是事件驱动。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>能否一句话说清买入逻辑。</li>
+                    <li>能否接受预设回撤而不临场变形。</li>
+                    <li>是否知道自己赚的是哪一种钱。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>写下个人投资目标、周期和最大可承受亏损。</li>
+                    <li>建立能力圈清单：熟悉、可跟踪、不碰。</li>
+                    <li>每笔交易前写 3 行买入理由。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>02</span>市场基础</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>股票、债券、基金、ETF、可转债、REITs 的差异。</li>
+                    <li>A 股交易制度、涨跌停、集合竞价、融资融券。</li>
+                    <li>指数、板块、风格和市场参与者结构。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>指数涨跌和个股表现是否一致。</li>
+                    <li>成交额、换手率是否支持行情延续。</li>
+                    <li>资金偏好是大盘蓝筹、成长，还是题材小票。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>每天记录上证、创业板、科创50、沪深300。</li>
+                    <li>跟踪成交额、涨跌家数、连板高度。</li>
+                    <li>把持仓归类到指数、行业和风格。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>03</span>宏观分析</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>经济周期：复苏、过热、滞胀、衰退。</li>
+                    <li>货币政策、财政政策、信用周期和产业政策。</li>
+                    <li>利率、汇率、通胀、社融、PMI 对资产的影响。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>流动性是宽松、收紧，还是边际改善。</li>
+                    <li>政策重点支持哪些方向，压制哪些方向。</li>
+                    <li>国内周期与海外利率、汇率是否共振。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>每月看一次社融、PMI、CPI/PPI。</li>
+                    <li>把宏观变量转化为行业受益/受压清单。</li>
+                    <li>避免用宏观观点替代个股研究。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>04</span>行业分析</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>行业空间、渗透率、生命周期和竞争格局。</li>
+                    <li>上游资源、中游制造、下游需求的利润分配。</li>
+                    <li>价格、库存、订单、产能、政策等景气指标。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>行业是周期反转、景气上行，还是主题炒作。</li>
+                    <li>龙头是否具备成本、技术、渠道或品牌优势。</li>
+                    <li>供给变化是否比需求变化更关键。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>画出目标行业产业链和关键公司。</li>
+                    <li>建立 3-5 个高频跟踪指标。</li>
+                    <li>区分“好行业”和“好价格”。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="note-stage research">
+          <h3 class="note-stage-title">02 分析与估值：把故事翻译成价值</h3>
+          <div class="note-grid">
+            <article class="note-card">
+              <h4><span>05</span>公司分析</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>商业模式：卖什么、卖给谁、凭什么赚钱。</li>
+                    <li>三张报表：利润表、资产负债表、现金流量表。</li>
+                    <li>管理层、股权结构、研发、渠道和客户集中度。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>收入增长是否能转化为利润和现金流。</li>
+                    <li>毛利率、净利率、ROE 是否稳定或改善。</li>
+                    <li>应收账款、存货、商誉是否积累风险。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>读近 3 年年报和最近 4 个季度财报。</li>
+                    <li>建立公司核心指标表。</li>
+                    <li>写出公司最重要的 3 个增长驱动和 3 个风险。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>06</span>估值体系</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>PE、PB、PS、PEG、EV/EBITDA 的适用场景。</li>
+                    <li>DCF、股息贴现和资产重估。</li>
+                    <li>历史分位、同行比较和成长性匹配。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>周期股低 PE 可能是景气高点。</li>
+                    <li>成长股高 PE 需要高增速和高确定性支撑。</li>
+                    <li>估值便宜不等于会涨，估值贵不等于马上跌。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>给目标公司设乐观、中性、悲观三种估值。</li>
+                    <li>记录当前估值所隐含的增长预期。</li>
+                    <li>只在赔率和胜率同时可接受时出手。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>07</span>技术分析</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>趋势、支撑、压力、突破、回踩。</li>
+                    <li>均线、成交量、MACD、RSI、BOLL 等工具。</li>
+                    <li>量价关系与资金情绪。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>上涨是否放量，回调是否缩量。</li>
+                    <li>关键均线和平台位置是否有效。</li>
+                    <li>突破后能否站稳，而不是一日游。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>标出买入前的支撑位、压力位和止损位。</li>
+                    <li>把技术分析用于择时，不替代基本面。</li>
+                    <li>复盘失败突破和成功突破的差异。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="note-stage execution">
+          <h3 class="note-stage-title">03 交易与组合：把判断变成规则</h3>
+          <div class="note-grid">
+            <article class="note-card">
+              <h4><span>08</span>交易体系</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>选股过滤、买点触发、仓位分批、止损止盈。</li>
+                    <li>左侧低吸、右侧确认、趋势跟随分别适合什么环境。</li>
+                    <li>胜率、赔率、交易频率和最大回撤之间的取舍。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>每次下单是否有明确买入理由、买入区间和止损线。</li>
+                    <li>加仓是否发生在走势验证后，而不是亏损摊成本。</li>
+                    <li>卖出是否依据逻辑、估值、趋势，而不是临场情绪。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>建立“选股-买入-加仓-减仓-卖出”交易计划模板。</li>
+                    <li>首仓、确认仓、趋势仓、预留仓分开管理。</li>
+                    <li>每周统计规则内交易、冲动交易和复盘修正规则。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>09</span>组合管理</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>股票、债券、现金、黄金、商品和海外资产。</li>
+                    <li>成长、价值、红利、周期、科技、消费等风格。</li>
+                    <li>行业分散、个股分散和风险预算。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>组合是否过度集中在同一风险因子。</li>
+                    <li>重仓股下跌是否会影响整体心态。</li>
+                    <li>资产之间是否真的分散，而不是同涨同跌。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>设置单股、单行业、单风格仓位上限。</li>
+                    <li>每月做一次组合暴露检查。</li>
+                    <li>用现金仓位给自己保留选择权。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>10</span>投资心理</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>过度自信、损失厌恶、锚定、从众和确认偏误。</li>
+                    <li>贪婪、恐惧、焦虑、侥幸和后悔的触发条件。</li>
+                    <li>纪律不是压抑情绪，而是提前设计流程。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>是否因为浮亏改变原本逻辑。</li>
+                    <li>是否因为短期上涨放弃估值约束。</li>
+                    <li>是否只寻找支持自己观点的信息。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>交易后记录当时情绪和决策理由。</li>
+                    <li>建立“不交易清单”。</li>
+                    <li>用仓位降低情绪波动，而不是靠意志硬扛。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="note-stage advance">
+          <h3 class="note-stage-title">04 风控与进阶：让体系长期活下来</h3>
+          <div class="note-grid">
+            <article class="note-card">
+              <h4><span>11</span>风险控制</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>个股风险、行业风险、市场风险和操作风险。</li>
+                    <li>止损、止盈、仓位上限和黑名单机制。</li>
+                    <li>极端行情下的流动性和相关性风险。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>投资逻辑是否被事实破坏。</li>
+                    <li>亏损是否来自可接受波动还是错误判断。</li>
+                    <li>是否存在单一事件导致重大回撤。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>每个持仓写清最大亏损容忍度。</li>
+                    <li>建立财务造假、业绩暴雷、减持等风险清单。</li>
+                    <li>行情大涨时也要做压力测试。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>12</span>信息研究</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>公告、财报、研报、行业数据、政策文件。</li>
+                    <li>一手信息、二手信息和市场传闻的区别。</li>
+                    <li>预期差：市场知道什么，不知道什么，误判什么。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>信息是否可验证，是否已经反映在价格里。</li>
+                    <li>利好是短期催化还是长期基本面改善。</li>
+                    <li>研报结论是否依赖过于乐观的假设。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>为重点公司建立公告和财报跟踪表。</li>
+                    <li>把新闻拆成事实、影响、已定价程度。</li>
+                    <li>用数据验证观点，不用观点筛选数据。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>13</span>投资流派</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>价值投资：好公司、好价格、安全边际。</li>
+                    <li>成长投资：大空间、高增速、强壁垒。</li>
+                    <li>趋势、周期、量化、指数投资的适用边界。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>策略是否与自己的性格和时间匹配。</li>
+                    <li>策略在什么市场环境下容易失效。</li>
+                    <li>是否把不同流派的规则混用到互相冲突。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>选择一个主流派作为核心框架。</li>
+                    <li>用其他流派补充视角，而不是频繁切换信仰。</li>
+                    <li>给自己的策略写适用条件和禁用条件。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="note-card">
+              <h4><span>14</span>实战进阶</h4>
+              <div class="note-columns">
+                <div class="note-block">
+                  <strong>学什么</strong>
+                  <ul>
+                    <li>建立投资系统：研究、交易、组合、风控、复盘。</li>
+                    <li>从单笔胜负转向长期期望值。</li>
+                    <li>持续迭代认知边界和执行纪律。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>怎么判断</strong>
+                  <ul>
+                    <li>是否能复盘出赚钱和亏钱的真实原因。</li>
+                    <li>是否能在不同市场环境下调整节奏。</li>
+                    <li>是否越来越少依赖临场情绪。</li>
+                  </ul>
+                </div>
+                <div class="note-block">
+                  <strong>实战动作</strong>
+                  <ul>
+                    <li>建立交易日志、持仓日志和月度复盘。</li>
+                    <li>总结可复制动作，删除低质量动作。</li>
+                    <li>每季度升级一次投资检查清单。</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="framework" aria-label="投资执行闭环">
+          <h3>一套可落地的投资执行闭环</h3>
+          <div class="framework-grid">
+            <div class="framework-item">
+              <b>1. 选标的</b>
+              <p>先从能力圈、行业景气和公司质量筛选，避免只因为短期涨幅关注一只股票。</p>
+            </div>
+            <div class="framework-item">
+              <b>2. 写逻辑</b>
+              <p>用三句话写清楚：为什么买、靠什么赚钱、什么情况说明自己错了。</p>
+            </div>
+            <div class="framework-item">
+              <b>3. 定价格</b>
+              <p>用估值和技术位置共同确定买入区、观察区和放弃区。</p>
+            </div>
+            <div class="framework-item">
+              <b>4. 管仓位</b>
+              <p>根据确定性、赔率、波动和组合集中度决定仓位，不让单笔交易决定命运。</p>
+            </div>
+            <div class="framework-item">
+              <b>5. 做复盘</b>
+              <p>复盘重点不是后悔涨跌，而是判断当时的信息、逻辑和执行是否合格。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="rulebook company-manual" aria-label="公司分析检查清单">
+          <h3>公司分析检查清单：把“好公司”拆成可验证问题</h3>
+          <p class="rulebook-intro">
+            选股不能只看故事和涨幅，核心是判断公司能不能持续赚钱、赚到的钱质量高不高、当前价格是否值得承担风险。
+            下面这套清单可以用于看年报、季报、研报和公告。
+          </p>
+
+          <div class="rule-grid">
+            <article class="rule-card">
+              <h4>一、商业模式：它到底靠什么赚钱</h4>
+              <h5>必须回答</h5>
+              <ul>
+                <li>公司卖什么产品或服务，收入主要来自哪几块业务。</li>
+                <li>客户是谁：To C、To B、政府、海外客户，还是大客户定制。</li>
+                <li>公司在产业链中处于什么位置：上游资源、中游制造、平台渠道，还是终端品牌。</li>
+                <li>定价权来自哪里：稀缺资源、技术壁垒、品牌、渠道、规模成本，还是客户认证。</li>
+              </ul>
+              <h5>危险信号</h5>
+              <ul>
+                <li>收入增长主要靠并购、补贴、一次性大单或关联交易。</li>
+                <li>业务频繁转型，主营不清晰，热点概念多但实际收入少。</li>
+                <li>客户过度集中，第一大客户变化会明显影响利润。</li>
+              </ul>
+              <div class="rule-formula">
+                一句话模板：这家公司通过“什么产品”，卖给“什么客户”，依靠“什么优势”，赚取“什么利润”。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>二、成长性：未来增长靠不靠谱</h4>
+              <h5>观察指标</h5>
+              <ul>
+                <li>营收和净利润是否连续 3 年或 4 个季度保持增长。</li>
+                <li>增长来自销量提升、价格上涨、份额提升、新产品，还是外延并购。</li>
+                <li>行业空间是否足够大，渗透率是否仍有提升空间。</li>
+                <li>在手订单、产能扩张、研发投入和渠道扩张是否能支撑未来收入。</li>
+              </ul>
+              <h5>判断方法</h5>
+              <ul>
+                <li>营收增长高但利润不增长，要看成本压力和竞争格局。</li>
+                <li>利润增长高但现金流差，要怀疑收入确认和回款质量。</li>
+                <li>短期高增长如果来自低基数，要看两年复合增速。</li>
+              </ul>
+              <div class="rule-formula">
+                成长质量排序：量价齐升 + 份额提升最好；只靠涨价次之；只靠并购或一次性订单要谨慎。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>三、盈利能力：赚钱是不是有质量</h4>
+              <h5>核心指标</h5>
+              <ul>
+                <li>毛利率：反映产品竞争力和定价权。</li>
+                <li>净利率：反映费用控制、规模效应和经营效率。</li>
+                <li>ROE：反映股东资本回报，但要拆解净利率、周转率和杠杆。</li>
+                <li>经营现金流：确认利润是不是真金白银。</li>
+              </ul>
+              <h5>判断方法</h5>
+              <ul>
+                <li>毛利率持续下滑，通常意味着竞争加剧或成本压力。</li>
+                <li>ROE 高但负债率也高，要警惕杠杆驱动。</li>
+                <li>净利润增长长期高于经营现金流增长，要重点检查回款。</li>
+              </ul>
+              <div class="rule-formula">
+                好信号：收入增长、利润增长、毛利率稳定、现金流同步改善。四者同向，质量更高。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>四、资产负债表：先看会不会出问题</h4>
+              <h5>重点科目</h5>
+              <ul>
+                <li>货币资金：是否覆盖短期债务，是否有受限资金。</li>
+                <li>应收账款：增速是否明显高于营收，账龄是否拉长。</li>
+                <li>存货：是否积压，是否需要跌价准备。</li>
+                <li>有息负债：短债压力、利息费用、资产负债率是否过高。</li>
+                <li>商誉：并购形成的商誉是否存在减值风险。</li>
+              </ul>
+              <h5>危险信号</h5>
+              <ul>
+                <li>利润很好看，但应收和存货同步大幅增加。</li>
+                <li>短债高、现金少、经营现金流差。</li>
+                <li>连续并购扩张，商誉占净资产比例过高。</li>
+              </ul>
+              <div class="rule-formula">
+                资产负债表优先级：先排雷，再谈成长。财务风险大的公司，即使故事再好也要降权。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>五、管理层与治理：人和机制是否可靠</h4>
+              <h5>观察维度</h5>
+              <ul>
+                <li>管理层是否长期稳定，战略表述是否前后一致。</li>
+                <li>实控人和管理层是否持股，利益是否与中小股东一致。</li>
+                <li>股权质押、减持、关联交易是否频繁。</li>
+                <li>历史承诺是否兑现：产能、订单、利润目标是否落地。</li>
+              </ul>
+              <h5>危险信号</h5>
+              <ul>
+                <li>高位频繁减持，同时对外讲长期空间。</li>
+                <li>关联交易复杂，资金往来不透明。</li>
+                <li>频繁讲故事、改名称、蹭热点，但主营改善不明显。</li>
+              </ul>
+              <div class="rule-formula">
+                管理层判断不要只听他说什么，要看过去三年“承诺了什么、兑现了什么、失败后怎么解释”。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>六、公司分析结论：给出买入前评级</h4>
+              <h5>四档评级</h5>
+              <ul>
+                <li>A 类：好行业、好公司、好财务、估值合理，可纳入核心池。</li>
+                <li>B 类：公司不错但估值偏贵，进入观察池，等回调或业绩上修。</li>
+                <li>C 类：逻辑有亮点但瑕疵明显，只能小仓位事件跟踪。</li>
+                <li>D 类：财务或治理风险不可接受，直接排除。</li>
+              </ul>
+              <h5>买入前最后三问</h5>
+              <ul>
+                <li>未来 1-2 年利润增长的主要来源是什么。</li>
+                <li>如果股价下跌 20%，我是敢加仓，还是会怀疑逻辑。</li>
+                <li>当前价格隐含的预期，是保守、合理，还是已经很乐观。</li>
+              </ul>
+              <div class="rule-formula">
+                结论模板：公司质量 __ 分，成长性 __ 分，财务安全 __ 分，治理 __ 分，估值赔率 __ 分；总分低于 75 不重仓。
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="rulebook industry-manual" aria-label="行业景气跟踪手册">
+          <h3>行业景气跟踪手册：判断风是不是正在吹</h3>
+          <p class="rulebook-intro">
+            好公司也要放在行业周期里看。行业景气决定盈利弹性，竞争格局决定利润能不能留下来。
+          </p>
+
+          <div class="rule-grid">
+            <article class="rule-card">
+              <h4>一、行业空间：天花板够不够高</h4>
+              <h5>核心问题</h5>
+              <ul>
+                <li>当前市场规模有多大，未来 3-5 年能否持续扩张。</li>
+                <li>渗透率处在早期、中期，还是接近成熟。</li>
+                <li>增长来自新增需求、替代需求，还是库存周期。</li>
+                <li>行业增长是否依赖补贴、政策、单一客户或海外需求。</li>
+              </ul>
+              <div class="rule-formula">
+                优先级：大空间 + 低渗透 + 高确定性最好；小空间 + 高渗透 + 高估值要谨慎。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>二、景气指标：用数据确认趋势</h4>
+              <h5>重点跟踪</h5>
+              <ul>
+                <li>需求端：订单、销量、招标、开工率、出口、终端库存。</li>
+                <li>价格端：产品价格、原材料价格、价差和毛利率变化。</li>
+                <li>供给端：产能投放、库存、开工率、行业资本开支。</li>
+                <li>政策端：补贴、准入、监管、国产替代、产业扶持。</li>
+              </ul>
+              <div class="rule-formula">
+                景气上行的典型组合：订单改善 + 价格稳定或上涨 + 库存下降 + 龙头扩产。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>三、竞争格局：利润会留给谁</h4>
+              <h5>判断标准</h5>
+              <ul>
+                <li>行业集中度是否提升，龙头份额是否扩大。</li>
+                <li>产品是否同质化，价格战是否频繁。</li>
+                <li>客户转换成本是否高，供应商议价能力是否强。</li>
+                <li>技术迭代是否会让现有龙头被替代。</li>
+              </ul>
+              <div class="rule-formula">
+                好格局：需求增长时龙头量价齐升；坏格局：需求增长但所有人扩产，最后只剩价格战。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>四、行业结论：给配置优先级</h4>
+              <h5>四种状态</h5>
+              <ul>
+                <li>强景气：需求、价格、业绩同时上行，可重点配置龙头。</li>
+                <li>弱修复：估值低、预期低、数据边际改善，可观察布局。</li>
+                <li>高位拥挤：景气好但估值贵、交易拥挤，谨慎追高。</li>
+                <li>景气下行：价格、订单、利润同步恶化，原则上回避。</li>
+              </ul>
+              <div class="rule-formula">
+                行业评级模板：空间 __ 分，景气 __ 分，格局 __ 分，政策 __ 分，估值位置 __ 分。
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="rulebook valuation-manual" aria-label="估值定价手册">
+          <h3>估值定价手册：判断贵不贵、值不值</h3>
+          <p class="rulebook-intro">
+            估值不是算一个精确数字，而是判断当前价格隐含了什么预期，以及自己承担的风险是否有足够补偿。
+          </p>
+
+          <div class="rule-grid">
+            <article class="rule-card">
+              <h4>一、选择估值方法：不同公司用不同尺子</h4>
+              <h5>适用场景</h5>
+              <ul>
+                <li>稳定盈利公司：PE、DCF、股息率。</li>
+                <li>重资产周期公司：PB、吨市值、资源储量、重置成本。</li>
+                <li>高成长公司：PEG、远期 PE、收入增速与利润率拐点。</li>
+                <li>平台或早期公司：PS、用户规模、单位经济模型。</li>
+                <li>金融地产：PB、ROE、资产质量、拨备和负债成本。</li>
+              </ul>
+              <div class="rule-formula">
+                估值方法错了，结论大概率也错。周期股低 PE 可能是顶部，成长股高 PE 可能合理也可能泡沫。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>二、估值三档：不要只算一个价格</h4>
+              <h5>三种情景</h5>
+              <ul>
+                <li>悲观情景：增长低于预期、利润率下降、估值回到低分位。</li>
+                <li>中性情景：业绩按合理增速兑现，估值保持历史中枢。</li>
+                <li>乐观情景：业绩上修、行业景气上行、估值提升。</li>
+              </ul>
+              <h5>落地方式</h5>
+              <ul>
+                <li>用未来 1-2 年利润乘以合理 PE，得到目标市值。</li>
+                <li>用目标市值除以总股本，得到目标价区间。</li>
+                <li>比较当前价格与悲观/中性/乐观价格的距离。</li>
+              </ul>
+              <div class="rule-formula">
+                只有当前价低于中性价值、接近悲观价值时，安全边际才比较舒服。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>三、估值陷阱：便宜可能有原因</h4>
+              <h5>常见陷阱</h5>
+              <ul>
+                <li>低 PE 陷阱：利润处于周期高点，下一年可能下滑。</li>
+                <li>低 PB 陷阱：资产质量差，净资产可能被减值。</li>
+                <li>高增长陷阱：收入增长快，但现金流差、费用失控。</li>
+                <li>一次性利润陷阱：投资收益、补贴、资产处置抬高利润。</li>
+              </ul>
+              <div class="rule-formula">
+                判断便宜前先问：如果这么便宜，市场在担心什么？这个担心能否被数据证伪？
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>四、买入价格：把估值变成区间</h4>
+              <h5>价格分区</h5>
+              <ul>
+                <li>低估区：悲观情景也有空间，可分批买入。</li>
+                <li>合理区：可小仓位跟踪，等待回调或业绩上修。</li>
+                <li>高估区：只适合强趋势持有，不适合新开重仓。</li>
+                <li>泡沫区：估值透支多年增长，优先减仓或回避。</li>
+              </ul>
+              <div class="rule-formula">
+                买入区间 = 中性价值向下留 20%-30% 安全边际；波动越大，折扣越高。
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="rulebook portfolio-manual" aria-label="组合仓位手册">
+          <h3>组合与仓位手册：让单笔判断服务整体收益</h3>
+          <p class="rulebook-intro">
+            投资结果不是单只股票决定的，而是由组合结构、仓位节奏和风险暴露共同决定。
+          </p>
+
+          <div class="rule-grid">
+            <article class="rule-card">
+              <h4>一、仓位分层：核心、卫星、现金</h4>
+              <h5>参考结构</h5>
+              <ul>
+                <li>核心仓：高质量、可长期跟踪的公司或 ETF，占组合 40%-60%。</li>
+                <li>卫星仓：景气、主题、事件驱动，占组合 20%-40%。</li>
+                <li>现金仓：等待机会和控制回撤，占组合 10%-30%。</li>
+              </ul>
+              <div class="rule-formula">
+                市场越亢奋，现金越有价值；市场越恐慌，现金越应该逐步转化为优质资产。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>二、单股上限：先防一次伤筋动骨</h4>
+              <h5>参考规则</h5>
+              <ul>
+                <li>普通股票单股不超过总资产 10%-15%。</li>
+                <li>高波动题材股单股不超过 5%-8%。</li>
+                <li>核心 ETF 或极高确定性资产可适度提高，但要有再平衡规则。</li>
+                <li>同一产业链相关股票合计不超过 25%-30%。</li>
+              </ul>
+              <div class="rule-formula">
+                你真正能承受的仓位，不是上涨时觉得舒服的仓位，而是下跌 20% 仍能执行计划的仓位。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>三、市场状态：决定进攻还是防守</h4>
+              <h5>仓位参考</h5>
+              <ul>
+                <li>强势市场：指数站上中期均线，成交放大，主线清晰，可 70%-80%。</li>
+                <li>震荡市场：指数横盘，板块轮动快，保持 50%-60%。</li>
+                <li>弱势市场：指数破位，成交低迷，亏钱效应明显，降到 30%-50%。</li>
+                <li>极端恐慌：优质资产跌到低估区，分批逆向，不一次性满仓。</li>
+              </ul>
+              <div class="rule-formula">
+                仓位不是观点强弱的表达，而是行情环境、确定性和风险承受能力的函数。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>四、再平衡：把组合拉回计划</h4>
+              <h5>触发条件</h5>
+              <ul>
+                <li>单一行业或风格超过原计划 10 个百分点。</li>
+                <li>某只股票上涨后占比过高，影响组合波动。</li>
+                <li>市场环境从强势转弱，或从弱势转强。</li>
+                <li>出现更高确定性、更好赔率的新机会。</li>
+              </ul>
+              <div class="rule-formula">
+                再平衡不是机械卖强买弱，而是让组合重新匹配你的目标、风险和市场环境。
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="rulebook risk-manual" aria-label="风险控制手册">
+          <h3>风险控制手册：先活下来，再追求收益</h3>
+          <p class="rulebook-intro">
+            风控不是悲观，而是承认自己会错。好的风控能让错误变小，让正确判断有机会发挥。
+          </p>
+
+          <div class="rule-grid">
+            <article class="rule-card">
+              <h4>一、个股排雷：先看不能买什么</h4>
+              <h5>高危信号</h5>
+              <ul>
+                <li>应收账款和存货长期高于收入增速。</li>
+                <li>经营现金流连续弱于净利润。</li>
+                <li>控股股东高比例质押、频繁减持或占用资金。</li>
+                <li>审计意见异常、频繁更换审计机构或财务负责人。</li>
+                <li>短期债务压力大，货币资金不足或受限。</li>
+              </ul>
+              <div class="rule-formula">
+                排雷规则：出现两个以上高危信号，原则上不买；已经持有则降仓并重新研究。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>二、止损规则：区分价格止损和逻辑止损</h4>
+              <h5>两类止损</h5>
+              <ul>
+                <li>价格止损：跌破关键支撑、趋势线或预设亏损比例。</li>
+                <li>逻辑止损：业绩、订单、价格、政策、竞争格局发生不利变化。</li>
+                <li>短线止损更重价格，中长期止损更重逻辑。</li>
+                <li>逻辑没坏但仓位过重，也要先降仓恢复理性。</li>
+              </ul>
+              <div class="rule-formula">
+                止损不是承认失败，而是把一次错误限制在组合能承受的范围内。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>三、情景推演：提前想坏结果</h4>
+              <h5>买入前推演</h5>
+              <ul>
+                <li>如果大盘下跌 10%，这只股票可能跌多少。</li>
+                <li>如果业绩低于预期，估值会压缩到哪里。</li>
+                <li>如果行业价格下跌，利润弹性会怎样变化。</li>
+                <li>如果跌到止损线，我是否能按计划执行。</li>
+              </ul>
+              <div class="rule-formula">
+                不能接受悲观情景，就不要用乐观情景说服自己买入。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>四、黑名单：减少重复犯错</h4>
+              <h5>应列入黑名单</h5>
+              <ul>
+                <li>财务质量长期差且解释不清的公司。</li>
+                <li>治理结构混乱、关联交易复杂的公司。</li>
+                <li>纯概念炒作、没有收入或利润支撑的标的。</li>
+                <li>自己多次因为同一类逻辑亏钱的交易模式。</li>
+              </ul>
+              <div class="rule-formula">
+                黑名单不是永久否定，而是要求更高证据门槛；没有新证据，不重新打开。
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="rulebook review-manual" aria-label="信息研究与复盘手册">
+          <h3>信息研究与复盘手册：把信息变成判断，把判断变成系统</h3>
+          <p class="rulebook-intro">
+            真正有效的信息研究，不是看得多，而是能区分事实、预期和价格反映程度。
+          </p>
+
+          <div class="rule-grid">
+            <article class="rule-card">
+              <h4>一、信息分层：事实、解释、观点分开</h4>
+              <h5>三层处理</h5>
+              <ul>
+                <li>事实：公告、财报、订单、价格、产能、政策原文。</li>
+                <li>解释：这件事对收入、利润、估值和现金流有什么影响。</li>
+                <li>观点：市场可能如何定价，我自己是否同意。</li>
+              </ul>
+              <div class="rule-formula">
+                看到利好先问：这是事实、推测，还是情绪？价格是否已经提前反映？
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>二、公告阅读：先抓关键变化</h4>
+              <h5>优先看</h5>
+              <ul>
+                <li>业绩预告、定期报告、重大合同、回购增持、减持。</li>
+                <li>资产收购、定增融资、股权激励、诉讼担保。</li>
+                <li>会计政策、资产减值、关联交易和监管问询。</li>
+              </ul>
+              <div class="rule-formula">
+                公告记录模板：发生了什么 → 影响哪张报表 → 是否改变未来 1-2 年利润预期。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>三、交易日志：留下可复盘证据</h4>
+              <h5>每笔记录</h5>
+              <ul>
+                <li>买入日期、价格、仓位、买入理由、止损线。</li>
+                <li>预期催化、目标周期、目标价格区间。</li>
+                <li>卖出日期、卖出理由、实际结果、错误分类。</li>
+              </ul>
+              <div class="rule-formula">
+                没有记录就没有复盘；没有复盘，亏损只能变成情绪，不能变成能力。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>四、月度复盘：升级系统，不纠结单笔</h4>
+              <h5>复盘顺序</h5>
+              <ul>
+                <li>组合收益与指数、行业、风格比较。</li>
+                <li>盈利贡献来自哪些标的和动作。</li>
+                <li>亏损来自逻辑、买点、仓位、纪律，还是市场环境。</li>
+                <li>下月保留什么规则，删除什么动作，新增什么观察指标。</li>
+              </ul>
+              <div class="rule-formula">
+                月度复盘结论只写三条：继续做什么、停止做什么、下月重点验证什么。
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="rulebook trade-manual" aria-label="交易规则手册">
+          <h3>交易规则手册：从选股到卖出的具体动作</h3>
+          <p class="rulebook-intro">
+            下面是一套偏中短结合的通用框架，适合 A 股普通投资者训练纪律。真正使用时，需要结合个人风险承受能力、
+            持仓周期和标的波动率调整参数。
+          </p>
+
+          <div class="rule-grid">
+            <article class="rule-card">
+              <h4>一、选股规则：先过滤，再排序</h4>
+              <h5>基础过滤</h5>
+              <ul>
+                <li>不碰看不懂主营业务、财务质量差、连续亏损且无明确拐点的公司。</li>
+                <li>优先选择处在景气上行、政策支持、国产替代、出海扩张或供需改善中的行业。</li>
+                <li>公司至少满足一个核心优势：成本、技术、品牌、渠道、资源、客户粘性或管理效率。</li>
+                <li>排除重大瑕疵：财务造假嫌疑、商誉过高、应收异常、频繁减持、治理混乱。</li>
+              </ul>
+              <h5>排序标准</h5>
+              <ol>
+                <li>行业景气度：未来 6-12 个月需求、价格、订单是否改善。</li>
+                <li>公司质量：ROE、毛利率、现金流、负债率是否健康。</li>
+                <li>估值赔率：当前位置是否有安全边际或合理成长溢价。</li>
+                <li>交易位置：是否处于回调支撑、平台突破、趋势修复或放量启动。</li>
+              </ol>
+              <div class="rule-formula">
+                简化打分：行业 30% + 公司 30% + 估值 20% + 技术位置 20%。低于 70 分只观察，不买入。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>二、买入规则：没有计划，不下单</h4>
+              <h5>买入前必须写清</h5>
+              <ul>
+                <li>买入逻辑：业绩增长、估值修复、景气反转、事件催化，还是趋势突破。</li>
+                <li>买入区间：理想买点、可接受买点、放弃追高线。</li>
+                <li>止损条件：价格破位、逻辑证伪、业绩低于预期或市场风格切换。</li>
+                <li>目标周期：短线 3-10 个交易日，中线 1-3 个月，长线 6 个月以上。</li>
+              </ul>
+              <h5>常用买点</h5>
+              <ul>
+                <li>回调买：强逻辑标的回踩 20 日线、60 日线或前平台支撑，缩量企稳。</li>
+                <li>突破买：放量突破箱体或前高，次日不跌回突破位。</li>
+                <li>左侧买：估值进入低位区间，基本面未坏，分 3-4 笔慢慢买。</li>
+                <li>右侧买：趋势重新站上关键均线，成交额放大，板块同步走强。</li>
+              </ul>
+              <div class="rule-formula">
+                单笔首仓建议 20%-30% 计划仓位。没有止损线、没有买入理由、没有仓位计划，三者缺一不买。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>三、加仓规则：只给正确的交易加仓</h4>
+              <h5>可以加仓</h5>
+              <ul>
+                <li>买入后走势符合预期，股价站稳关键位，没有跌破原计划止损线。</li>
+                <li>行业或公司出现新增正反馈：订单、价格、业绩、政策、资金共振。</li>
+                <li>突破后回踩不破，成交量健康，板块内有多只个股同步确认。</li>
+                <li>估值仍未明显透支，继续上涨的赔率大于下跌风险。</li>
+              </ul>
+              <h5>禁止加仓</h5>
+              <ul>
+                <li>亏损后为了摊低成本而补仓，但原买入逻辑已经变弱。</li>
+                <li>高位放量长上影、跌破趋势线、板块退潮时强行加仓。</li>
+                <li>单只股票仓位已经超过组合上限，还因为情绪继续追买。</li>
+              </ul>
+              <div class="rule-formula">
+                加仓顺序：首仓 30% → 确认 30% → 强趋势 20% → 预留 20%。越涨越要提高确认标准。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>四、减仓规则：先降风险，再谈格局</h4>
+              <h5>主动减仓</h5>
+              <ul>
+                <li>短期涨幅过快，价格明显脱离均线，成交异常放大。</li>
+                <li>达到第一目标价，但基本面没有新的上修证据。</li>
+                <li>组合过度集中在一个行业或一个风格，波动超过承受范围。</li>
+                <li>市场成交萎缩、指数破位、板块热度退潮。</li>
+              </ul>
+              <h5>被动减仓</h5>
+              <ul>
+                <li>跌破关键支撑但逻辑未完全证伪，先减 1/3 到 1/2。</li>
+                <li>财报低于预期但还需观察，先把仓位降到不会影响心态。</li>
+                <li>持仓理由变复杂、说不清楚时，先减仓再重新研究。</li>
+              </ul>
+              <div class="rule-formula">
+                减仓不是看空，而是把不确定性变小。涨多了减一点，跌错了减一半，看不懂就降到轻仓。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>五、卖出规则：卖出要比买入更纪律化</h4>
+              <h5>必须卖出</h5>
+              <ul>
+                <li>核心逻辑证伪：业绩、订单、价格、竞争格局或政策方向明显恶化。</li>
+                <li>财务风险暴露：现金流恶化、应收暴增、存货积压、商誉减值。</li>
+                <li>价格跌破止损线，并且没有基本面改善抵消风险。</li>
+                <li>发现更高确定性、更好赔率的替代标的，需要腾挪资金。</li>
+              </ul>
+              <h5>分批止盈</h5>
+              <ul>
+                <li>上涨 20%-30% 且进入压力区，先兑现 1/3。</li>
+                <li>估值达到历史高分位但增长没有继续上修，再兑现 1/3。</li>
+                <li>剩余仓位用趋势线或核心逻辑持有，让利润奔跑。</li>
+              </ul>
+              <div class="rule-formula">
+                卖出三问：逻辑坏了吗？估值贵了吗？趋势破了吗？三个都没有，不急着卖；任意两个成立，果断降仓。
+              </div>
+            </article>
+
+            <article class="rule-card">
+              <h4>六、复盘规则：把经验沉淀成系统</h4>
+              <h5>每笔交易复盘</h5>
+              <ul>
+                <li>买入理由是否真实存在，还是事后找理由。</li>
+                <li>买点是否合理，是否追高或过早左侧。</li>
+                <li>仓位是否匹配确定性和风险。</li>
+                <li>卖出是否执行计划，还是被情绪驱动。</li>
+              </ul>
+              <h5>月度复盘</h5>
+              <ul>
+                <li>收益来自选股、择时、仓位，还是市场风格。</li>
+                <li>亏损来自逻辑错误、买点错误、仓位错误，还是纪律错误。</li>
+                <li>保留 1-2 个有效动作，删除 1-2 个低质量动作。</li>
+              </ul>
+              <div class="rule-formula">
+                复盘模板：当初为什么买 → 事实如何变化 → 我做对了什么 → 我错在哪里 → 下次规则怎么改。
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="final-checklist" aria-label="最终投资检查表">
+          <h3>最终投资检查表：下单前、持仓中、卖出后</h3>
+          <div class="checklist-grid">
+            <article class="checklist-card">
+              <b>下单前 10 问</b>
+              <ul>
+                <li>我是否看懂主营业务和赚钱方式。</li>
+                <li>行业景气是否正在改善或维持高位。</li>
+                <li>公司质量是否通过财务和治理检查。</li>
+                <li>估值是否有安全边际或成长合理性。</li>
+                <li>买入逻辑能否用三句话说清。</li>
+                <li>买入区间、止损线、目标周期是否写好。</li>
+                <li>仓位是否与确定性匹配。</li>
+                <li>最坏情景能否承受。</li>
+                <li>是否存在更好的替代标的。</li>
+                <li>这笔交易是规则内动作，还是临场冲动。</li>
+              </ul>
+            </article>
+
+            <article class="checklist-card">
+              <b>持仓中 8 看</b>
+              <ul>
+                <li>原买入逻辑是否仍然成立。</li>
+                <li>业绩、订单、价格、政策是否有新变化。</li>
+                <li>估值是否已经进入高估区。</li>
+                <li>技术趋势是否破坏。</li>
+                <li>仓位是否过重影响心态。</li>
+                <li>组合是否过度暴露同一行业或风格。</li>
+                <li>是否出现财务或治理风险信号。</li>
+                <li>是否需要加仓、减仓、持有或卖出。</li>
+              </ul>
+            </article>
+
+            <article class="checklist-card">
+              <b>卖出后 6 复盘</b>
+              <ul>
+                <li>买入逻辑是否正确。</li>
+                <li>买点是否合理。</li>
+                <li>仓位是否合适。</li>
+                <li>卖出是否按计划执行。</li>
+                <li>盈利或亏损主要来自什么。</li>
+                <li>下一次规则要如何微调。</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="disclaimer" aria-label="免责声明与使用说明">
+          <h3>免责声明与使用说明</h3>
+          <p>
+            <strong>资料用途：</strong>本页面仅用于证券投资知识学习、研究框架整理和个人复盘训练，不构成任何形式的投资建议、
+            证券推荐、收益承诺或买卖依据。
+          </p>
+          <p>
+            <strong>参数说明：</strong>页面中的仓位比例、评分阈值、止盈止损区间、买入/卖出条件等均为示例化学习框架，
+            不适用于所有投资者、所有市场环境或所有证券品种。实际使用时，应结合个人风险承受能力、资金期限、投资经验、
+            标的波动率和市场状态独立调整。
+          </p>
+          <p>
+            <strong>风险提示：</strong>证券市场有风险，价格可能受到宏观政策、行业周期、公司经营、流动性、市场情绪等多重因素影响。
+            任何投资决策均可能产生亏损，投资者应独立判断、审慎决策，并自行承担投资结果。
+          </p>
+          <p>
+            <strong>公开引用：</strong>如公开分享或转载本页面内容，建议保留本免责声明，并避免将其中的规则、阈值或案例化表达解读为
+            针对特定证券的推荐意见。
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
